@@ -88,12 +88,14 @@ background-color:black;
 
 .date-font { color: #006699; font: 13px arial, sans-serif; font-weight: bold; }
 
-
-#leftdiv{
+.box{
+    max-width: 1440px;
+}
+.leftdiv{
     background-color: #e8e8e8;
     float: left;   
-    width: 15%;
-    height: 278px;
+    width: 220px;
+    height: 300px;
     padding: 10.5px;
     border: 2px transparent;
     border-radius:  50px 25px;
@@ -101,10 +103,10 @@ background-color:black;
     box-shadow: 5px 5px 5px #888888;
 }
 
-#rightdiv{
+.rightdiv{
     background-color: #e8e8e8;
     float: right;
-    width: 75.9%;
+    width: 950px;
     height: inherit;
     padding: 10px;
     border: 0.1px solid;
@@ -116,7 +118,7 @@ background-color:black;
     background-color: #e8e8e8;
     float: right;
     font-family: cursive;
-    width: 95%;
+    width: inherit;
     height: inherit;
     padding: 10px;
     border: 0.1px transparent;
