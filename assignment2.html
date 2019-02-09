@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+
+<html>
+<head >
+	<title>Js part 1,2</title>
+	
+	<style type="text/css">
+		
+body{
+
+	margin:5px;
+	padding:10px;
+	
+background-color: lavender;
+}
+        
+
+#quoteDiv{
+
+	border:20px solid #66124a;
+	padding:150px;
+}
+        #fieldset{	
+            padding: 1px;
+            border:20px solid #66124a;
+                color: orange;
+        font-family: "Times New Roman", Times, serif;}
+        
+        button{
+			padding: 10px;
+			float: left;
+		}
+        h2{
+            text-align: center;
+        }
+        #foot{
+        background-color: beige;
+        }
+        
+        
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	
+function convert() {
+   var input = document.getElementById("input");
+   value = parseInt(input.value);
+    if( isNaN(value) ){  
+       value=0;
+       }
+       unit="";
+   var conversion = document.getElementById("convert");
+   if (conversion.value == "kg to lb") {
+      value *= 2.2046;
+  unit =" pounds";
+       } else {
+          value *= 0.4536;
+          unit = " kilograms";
+       }
+       
+       var answer = document.getElementById("answer");
+       answer.innerHTML = value+unit;
+}
+
+</script>
+<script type="text/javascript">
+	function calculate() {
+  var values = document.getElementById('box1').value.split(/,| /);
+  values=values.filter(Boolean);
+  var sum = values.reduce(function(a, b) { return parseInt(a) + parseInt(b); });
+  document.querySelector('#max').innerHTML = values.max();
+  document.querySelector('#min').innerHTML = values.min();
+  document.querySelector('#sum').innerHTML = sum;
+  document.querySelector('#avg').innerHTML = sum / values.length;
+  document.querySelector('#reverse').innerHTML = values.reverse().join(',');
+}
+
+Array.prototype.max = function() {
+  return Math.max.apply(null, this);
+};
+
+Array.prototype.min = function() {
+  return Math.min.apply(null, this);
+};
+
+
+</script>
+    
+<fieldset>
+	<legend style="font-size:300%;">Convert</legend>
+<input id="input" type="text" oninput="convert()">
+<select id="convert" onchange="convert()">
+<option value="lb to Kg">lb to Kg</option>
+<option value="kg to lb" >kg to lb</option>
+</select>
+
+<span id="answer"></span>
+</fieldset>
+
+
+<fieldset>
+	<legend style="font-size:300%;">Max,Min find out</legend>
+
+    <table width="50%" border="0" align="center">
+      <tr>
+        <td width="13%">Input Series of Number:</td>
+        <td width="29%"><input name="box1" type="text" id="box1" value="" oninput="calculate()"/></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Max :</td>
+        <td><div id="max"> </div></td>
+      </tr>
+      <tr>
+        <td>Min :</td>
+        <td><div id="min"> </div></td>
+      </tr>
+      <tr>
+        <td>Sum  :</td>
+        <td><div id="sum"> </div></td>
+      </tr>
+      <tr>
+        <td>Average :</td>
+        <td><div id="avg"> </div></td>
+      </tr>
+      <tr>
+        <td>Reverse Order :</td>
+        <td><div id="reverse"> </div></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td></td>
+      </tr>
+    </table>
+
+</fieldset>
+    <fieldset>
+    
+    <h2>Magic!</h2>
+    <textarea id="Magic!" rows="17" cols="70">Sample Item 
+         boiling item
+  alpha 
+ Aample Item    
+Sample Item    
+  Sample Item 
+ 
+My Sample Item 
+Bample Item 
+
+
+Cample Item </textarea>
+	
+		<br>
+		<button value="clear" onclick="clearIt()">Clear It</button>
+		<button value="capitalize" onclick="capitalize()">Capitalize</button>
+		<button value="sort" onclick="sort()">Sort</button>
+		<button value="reverse" onclick="reverse()">Reverse</button>
+		<button value="stripBlank" onclick="strip()">Strip Blank</button>
+		<button value="addNumbers" onclick="addNum()">Add Numbers</button>
+		<button value="shuffle" onclick="shuffle()">Shuffle</button>
+    </fieldset>
+    <script type="text/javascript">
+    function clearIt() {
+        document.getElementById("Magic!").value = "";
+     }
+            
+    function capitalize(){
+        var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n");
+
+        if(!hasLowerCase(textArea)){document.getElementById("Magic!").value=textArea.toLowerCase();}
+
+        if(hasLowerCase(textArea)){
+        document.getElementById("Magic!").value=textArea.toUpperCase();}
+        
+     }
+            
+    function hasLowerCase(str) {
+        return (/[a-z]/.test(str));
+    }
+            
+    function sort(){
+        strip();
+        var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n");
+        arrayOfLines.sort();
+        var x = arrayOfLines.join("\n");
+        document.getElementById("Magic!").value=x; 
+    }
+            
+    function reverse(){
+        var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n");
+        
+        
+        for(var k=0;k<arrayOfLines.length;k++){    
+         var eachLine= arrayOfLines[k];     
+         eachLine=eachLine.trim();
+         arrayOfLines[k]=eachLine;    
+        }
+        //Reverse
+        for(var k=0;k<arrayOfLines.length;k++){    
+        var eachLine= arrayOfLines[k];
+        var words = eachLine.split(" ");
+        var x=""; 
+        for(var i=0;i<words.length;i++){
+        var temp = words[i].split("");     
+        temp.reverse();
+        
+        }words.reverse();
+         arrayOfLines[k]=words.join(" ");   
+        }
+        var x = arrayOfLines.join("\n");
+        document.getElementById("Magic!").value=x;
+    }    
+            
+    function strip(){
+        var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n"); 
+        for(var k=0;k<arrayOfLines.length;k++){    
+         var eachLine= arrayOfLines[k];     
+         eachLine=eachLine.trim();
+         arrayOfLines[k]=eachLine;    
+        }
+        arrayOfLines = arrayOfLines.filter(Boolean);
+        var x = arrayOfLines.join("\n");
+        document.getElementById("Magic!").value=x;       
+    }
+        
+    function addNum(){
+       var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n"); 
+        for(var k=0,l=0;k<arrayOfLines.length;k++){
+          var eachLine= arrayOfLines[k]; 
+          if(/[^\s]/.test(eachLine)){
+          eachLine=(l+1)+" "+eachLine;l++;
+          arrayOfLines[k]=eachLine; 
+         }
+        }
+        var x = arrayOfLines.join("\n");
+        document.getElementById("Magic!").value=x; 
+    }
+        
+    function shuffle(){
+    var textArea= document.getElementById("Magic!").value;
+    var arrayOfLines = textArea.split("\n"); 
+    for(var k=0;k<arrayOfLines.length;k++){    
+         var eachLine= arrayOfLines[k];     
+         if(/[^\S]/.test(eachLine)){
+             eachLine=eachLine.trim();
+             arrayOfLines[k]=eachLine;
+         }    
+        }    
+    arrayOfLines = arrayOfLines.filter(Boolean);
+        
+    let ctr = arrayOfLines.length;
+    let temp; let index;
+    while (ctr > 0) {
+     index = Math.floor(Math.random() * ctr);
+     ctr--;
+     temp = arrayOfLines[ctr];
+     arrayOfLines[ctr] = arrayOfLines[index];
+     arrayOfLines[index] = temp;
+    }
+    var x = arrayOfLines.join("\n");
+    document.getElementById("Magic!").value=x;
+    }    
+    </script>   
+        
+    
+
+
+<section>
+
+	<footer id="foot">
+	<div id="quoteDiv">
+
+		<script type="text/javascript">
+		
+var quotes=[
+	    'To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment. – Ralph Waldo Emerson',
+'Most people are other people. Their thoughts are someone else’s opinions, their lives a mimicry, their passions a quotation. – Oscar Wilde',
+
+   'Creativity is just connecting things.― Steve Jobs',
+
+	'Stay hungry. Stay foolish.- Steve Jobs',
+	'We all have big changes in our lives that are more or less a second chance.',
+    'I’ve always been somewhere down from the top, so I’ve never had to suffer being knocked off the top.',
+'Your spiritual sense will make you either a winner or a loser.',
+'The beauty in being blessed with talent is rising above doubters to create a beautiful moment.',
+'    Don’t waste time on what’s not important. Don’t get sucked into the drama. Get on with it: don’t dwell on the past. Be a big person; be generous of spirit; be the person you’d admire.– Allegra Huston',
+'I’m a classic example of all humorists – only funny when I’m working.'
+
+   ]
+   function newQuote(){
+var randomNumber=Math.floor(Math.random()*(quotes.length));
+document.write(quotes[randomNumber]);
+	 
+ }
+newQuote()
+	</script>
+	</div>
+ <div id="buttonDiv">     
+     <button class="button" onclick="btnRed()" style="background-color: red;color: red">Button1</button>
+        <button class="button" onclick="btnGreen()" style="background-color: green;color: green">Button2</button>
+        <button class="button" onclick="btnBlue()" style="background-color: blue;color: blue">Button3</button>
+        <button class="button" onclick="btnYellow()" style="background-color: yellow;color: yellow">Button4</button>
+        
+        <script type="text/javascript">
+       function btnRed() {document.getElementById("quoteDiv").style.backgroundColor="Red";
+                document.getElementById("quoteDiv").style.color="white";
+                document.getElementById("quoteDiv").style.fontFamily = "Impact,Charcoal,sans-serif";
+
+                         document.getElementById("quoteDiv").style.borderColor = "black";}
+            
+       function btnGreen() {document.getElementById("quoteDiv").style.backgroundColor="Green";
+                        document.getElementById("quoteDiv").style.color="#98FB98";
+document.getElementById("quoteDiv").style.fontFamily = "Georgia";
+                           document.getElementById("quoteDiv").style.borderColor = "#927943";}
+            
+       function btnBlue() {document.getElementById("quoteDiv").style.backgroundColor="Blue";document.getElementById("quoteDiv").style.fontFamily = "Lucida Console";document.getElementById("quoteDiv").style.borderColor = "#e67943"; document.getElementById("quoteDiv").style.color="#FF6347";}
+            
+       function btnYellow() {document.getElementById("quoteDiv").style.backgroundColor="Yellow";document.getElementById("quoteDiv").style.borderColor = "#731040";document.getElementById("quoteDiv").style.fontFamily = "Tahoma"; document.getElementById("quoteDiv").style.color="#A52A2A";} 
+       </script> 
+        </div>
+
+	
+        
+</footer>
+    </section>
+</body>
+</html> 
